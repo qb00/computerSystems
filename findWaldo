@@ -1,0 +1,41 @@
+#!/bin/bash 
+#makes the file executable
+
+puzzle=$1
+#getting from user
+
+#initalize waldo instances
+sO=0
+sE=0
+fL=0
+fN=0
+
+#i=0
+for((i=0; i<100; i++));
+do
+    ./$1 $i >sOF 2>sEF
+    #create file
+    
+    
+    sO=$(grep -i waldo sOF | wc -l)
+    
+    sE=$(grep -i waldo sEF | wc -l)
+    
+    #searches both files and finds the number of waldos
+
+    fL=$(grep -R -i waldo PuzzleDir | wc -l)
+    
+    fN=$(find PuzzleDir -iname waldo | wc -l)
+    #searches for waldo instances in PuzzleDir
+
+    if (($sO > 0 || $sE > 0 || $fL > 0 || $fN>0));
+       then
+       echo $puzzle $i $sO $sE $fL $fN
+
+    fi
+    rm -r PuzzleDir
+
+    #prints out solution via if statements
+ #   i=$((i + 1))
+done
+	
